@@ -1,77 +1,148 @@
 /* ================================
-   Global Styles
+   CSS CUSTOM PROPERTIES (VARIABLES)
 =================================== */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #0f1724;
-  color: #e6eef6;
+:root {
+  /* Color Palette */
+  --color-primary: #5865f2;
+  --color-primary-hover: #4752c4;
+  --color-background-dark: #0f1724;
+  --color-background-medium: #111827;
+  --color-background-light: #1e293b;
+  --color-background-lighter: #1f2937;
+  --color-surface: #2d3748;
+  --color-border: #555555;
+  --color-border-light: #2d3b52;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #e6eef6;
+  --color-text-muted: #cbd5e1;
+  --color-text-icon: #9aa4b2;
+
+  /* Spacing */
+  --spacing-xs: 6px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 14px;
+  --spacing-xl: 16px;
+  --spacing-2xl: 20px;
+  --spacing-3xl: 24px;
+
+  /* Sizes */
+  --header-height: 64px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+  --card-content-width: 381px;
+  --card-content-height: 215px;
+  --card-min-height: 300px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 0 20px rgba(0, 0, 0, 0.8);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+
+  /* Z-index layers */
+  --z-sticky: 1000;
+  --z-modal: 2000;
 }
 
 /* ================================
-   Top Bar
+   RESET & BASE STYLES
 =================================== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--color-background-dark);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Remove default button styles */
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Remove default link styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ================================
+   LAYOUT COMPONENTS
+=================================== */
+
+/* Top Bar - Fixed header with branding and login */
 .top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 24px;
-  background-color: #111827;
-  border-bottom: 1px solid #2d3b52;
+  padding: var(--spacing-lg) var(--spacing-3xl);
+  background-color: var(--color-background-medium);
+  border-bottom: 1px solid var(--color-border-light);
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: var(--z-sticky);
 }
 
 .top-bar-left {
   font-size: 18px;
   font-weight: bold;
-  color: #ffffff;
+  color: var(--color-text-primary);
 }
 
 .top-bar-right button {
-  background: #5865f2;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
+  background: var(--color-primary);
+  color: var(--color-text-primary);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-md);
   font-weight: 600;
+  transition: background-color var(--transition-fast);
 }
 
-/* ================================
-   Navbar
-=================================== */
+.top-bar-right button:hover {
+  background: var(--color-primary-hover);
+}
+
+/* Navigation Bar - Horizontal navigation with icons */
 .navbar {
-  background-color: #1f2937;
-  padding: 10px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: var(--color-background-lighter);
+  padding: 10px var(--spacing-2xl);
+  box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: var(--z-sticky);
   text-align: center;
 }
 
 .nav-container {
   display: flex;
-  justify-content: center; /* center links horizontally */
-  gap: 20px;
+  justify-content: center;
+  gap: var(--spacing-2xl);
   align-items: center;
   width: 100%;
-  flex-wrap: wrap; /* wrap on smaller screens */
+  flex-wrap: wrap;
 }
 
 .nav-item {
   color: #f3f4f6;
-  text-decoration: none;
   font-size: 14px;
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) 10px;
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-fast);
 }
 
 .nav-item i {
@@ -82,118 +153,153 @@ body {
 
 .nav-item:hover {
   background-color: #374151;
-  color: #ffffff;
+  color: var(--color-text-primary);
 }
 
 .nav-item.active {
-  color: #ffffff;
-  background-color: #5865f2;
-  border-radius: 6px;
+  color: var(--color-text-primary);
+  background-color: var(--color-primary);
+  border-radius: var(--border-radius-md);
 }
 
-/* ================================
-   Container
-=================================== */
+/* Main Container - Centered content wrapper */
 .container {
   max-width: 1200px;
-  margin: 20px auto;
-  padding: 20px;
+  margin: var(--spacing-2xl) auto;
+  padding: var(--spacing-2xl);
 }
 
 /* ================================
-   Card Styles
+   CARD COMPONENT SYSTEM
 =================================== */
+
+/* Card Base - Main container for boss information */
 .card {
-  background: #1e293b;
-  border: 1px solid #555555; /* 1px border around card */
-  border-radius: 8px;
+  background: var(--color-background-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: var(--spacing-2xl);
 }
 
+/* Card Header - Boss name and icon */
 .card-header {
-  background: #2d3748;
-  height: 64px; /* header bar is 64px tall */
-  padding: 0 0px;
+  background: var(--color-surface);
+  height: var(--header-height);
+  padding: 0;
   font-size: 20px;
   font-weight: bold;
-  border-bottom: 1px solid #2d3b52;
+  border-bottom: 1px solid var(--color-border-light);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--spacing-md);
 }
 
 .card-header img {
-  height: 100%; /* scale relative to header height */
-  width: auto; /* keep aspect ratio */
+  height: 100%;
+  width: auto;
   object-fit: contain;
 }
 
 .card-header i {
-  color: #9aa4b2;
+  color: var(--color-text-icon);
   font-size: 18px;
   cursor: pointer;
+  transition: color var(--transition-fast);
 }
 
 .card-header i:hover {
-  color: #ffffff;
+  color: var(--color-text-primary);
 }
 
+/* Card Body - Main content area with flexible layout */
 .card-body {
   display: flex;
-  gap: 16px;
-  padding: 20px;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-2xl);
   align-items: stretch;
 }
 
+/* Card Left Section - Boss image with optional carousel */
 .card-left {
   flex: 2;
   display: flex;
+  align-items: stretch;
 }
 
 .card-left img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 6px;
-  display: block;
-  border: 1px solid #555555; /* 1px border around image */
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
 }
 
+.card-left img:hover {
+  transform: scale(1.02);
+}
+
+/* Card Right Section - Text guide and video */
 .card-right {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 12px;
+  gap: var(--spacing-md);
+  min-height: var(--card-min-height);
 }
 
+/* Card Text - Scrollable text content */
 .card-text {
-  background: #111827;
-  padding: 12px;
-  border-radius: 6px;
+  background: var(--color-background-medium);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
   font-size: 14px;
-  color: #cbd5e1;
-  width: 381px;
-  height: 215px;
-  box-sizing: border-box;
+  color: var(--color-text-muted);
+  width: var(--card-content-width);
+  height: var(--card-content-height);
   overflow-y: auto;
+  border: 1px solid var(--color-border-light);
 }
 
+/* Custom scrollbar for text areas */
+.card-text::-webkit-scrollbar {
+  width: var(--spacing-sm);
+}
+
+.card-text::-webkit-scrollbar-track {
+  background: var(--color-background-light);
+  border-radius: var(--border-radius-sm);
+}
+
+.card-text::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--border-radius-sm);
+}
+
+.card-text::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-icon);
+}
+
+/* Card Video - Embedded video player */
 .card-video {
   flex: 1;
 }
 
 .card-video iframe {
-  width: 381px;
-  height: 215px;
-  border-radius: 6px;
-  border: none;
+  width: var(--card-content-width);
+  height: var(--card-content-height);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border);
 }
 
 /* ================================
-   Fullscreen Image (script.js)
+   INTERACTIVE COMPONENTS
 =================================== */
+
+/* Fullscreen Image Overlay */
 .fullscreen {
   position: fixed;
   top: 0;
@@ -204,14 +310,205 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-index: var(--z-modal);
+  backdrop-filter: blur(4px);
 }
 
 .fullscreen img {
   max-width: 90%;
   max-height: 90%;
-  border-radius: 8px;
-  border: 2px solid #555555;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
   cursor: zoom-out;
+  object-fit: contain;
+}
+
+/* Image Carousel - Multi-image navigation */
+.image-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: var(--card-min-height);
+}
+
+.carousel-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border);
+  opacity: 0;
+  transition: opacity var(--transition-medium);
+  cursor: pointer;
+}
+
+.carousel-image.active {
+  opacity: 1;
+}
+
+.carousel-image:hover {
+  transform: scale(1.02);
+}
+
+/* Carousel Navigation Controls */
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  pointer-events: none;
+}
+
+.carousel-controls button {
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--color-text-primary);
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 50%;
+  pointer-events: auto;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(4px);
+}
+
+.carousel-controls button:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.1);
+}
+
+.carousel-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ================================
+   RESPONSIVE DESIGN
+=================================== */
+
+/* Tablet breakpoint */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-xl);
+    margin: var(--spacing-xl) auto;
+  }
+
+  .card-body {
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  .card-left {
+    min-height: auto;
+  }
+
+  .card-right {
+    width: 100%;
+  }
+
+  .card-text,
+  .card-video iframe {
+    width: 100%;
+    height: 200px;
+  }
+
+  .top-bar {
+    padding: var(--spacing-md) var(--spacing-xl);
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+  }
+
+  .nav-container {
+    gap: var(--spacing-md);
+  }
+}
+
+/* Mobile breakpoint */
+@media (max-width: 480px) {
+  .top-bar-left {
+    font-size: 16px;
+  }
+
+  .top-bar-right button {
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 14px;
+  }
+
+  .navbar {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .nav-container {
+    gap: var(--spacing-sm);
+  }
+
+  .nav-item {
+    font-size: 12px;
+    padding: var(--spacing-xs);
+  }
+
+  .card-header {
+    font-size: 18px;
+    height: 56px;
+  }
+
+  .container {
+    padding: var(--spacing-md);
+  }
+
+  .card-body {
+    padding: var(--spacing-xl);
+  }
+}
+
+/* ================================
+   UTILITY CLASSES
+=================================== */
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Focus styles for keyboard navigation */
+button:focus-visible,
+.nav-item:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-border: #ffffff;
+    --color-text-muted: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

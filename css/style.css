@@ -199,6 +199,7 @@ a {
   height: 100%;
   width: auto;
   object-fit: contain;
+  margin-left: 10px;
 }
 
 .card-header i {

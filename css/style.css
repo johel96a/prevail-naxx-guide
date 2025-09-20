@@ -680,3 +680,17 @@ button:focus-visible,
     transition-duration: 0.01ms !important;
   }
 }
+
+html,
+body {
+  background-color: var(--color-background-dark) !important;
+}
+
+.container {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+.card-grid {
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
+}
